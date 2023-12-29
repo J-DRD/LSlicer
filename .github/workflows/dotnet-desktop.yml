@@ -84,6 +84,13 @@ jobs:
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
       #run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+      run: git submodules init && dotnet restore
+      env:
+        Configuration: ${{ matrix.configuration }}
+
+    # Restore the application to populate the obj folder with RuntimeIdentifiers
+    - name: Build the application
+      #run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
       run: dotnet build
       env:
         Configuration: ${{ matrix.configuration }}
